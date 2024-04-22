@@ -2,8 +2,6 @@ import streamlit as st
 from streamlit_extras.add_vertical_space import add_vertical_space
 
 def st_sidebar():
-    # st.sidebar.image("images/sslogo.png", use_column_width=True)
-
     with st.sidebar:
         # store_link = st.text_input("Enter Your Store URL:",   value="http://hypech.com/StoreSpark", disabled=True, key="store_link")
         openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
@@ -14,24 +12,23 @@ def st_sidebar():
     return openai_api_key
 
    
-def st_logo(title="OmniExtract!", page_title="Aritificial Intelligence"):
-    st.set_page_config(page_title,  page_icon="🚀",)
+def st_logo(title="aiXpert!"):
     st.title(title)
 
-    st.markdown(
-    """
+    st.markdown("""
     <style>
         [data-testid="stSidebarNav"] {
-            background-image: url(https://hypech.com/images/logo/omniextract.png);
+            background-image: url(https://hypech.com/images/logo/st_receiptbot.png);
             background-size: 300px; /* Set the width and height of the image */
             background-repeat: no-repeat;
-            padding-top: 40px;
-            background-position: 1px 40px;
+            padding-top: 80px;
+            background-position: 15px 10px;
         }
     </style>
     """,
     unsafe_allow_html=True,
 )
+
 
 def st_text_preprocessing_contents():
     st.markdown("""
@@ -41,8 +38,6 @@ def st_text_preprocessing_contents():
         - Perform Stemming and Lemmatization
     """)    
 
-def st_load_book():
-    st.image("./images/dataacquisition.png")
 
 def st_read_pdf():
     st.markdown("""

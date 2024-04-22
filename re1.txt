@@ -1,0 +1,44 @@
+Here is the extracted information from the receipt image provided, structured as a JSON object according to the given schema.
+
+```json
+{
+  "receipt_headers": {
+    "store_name": "Starbucks E Food Court #16599",
+    "slogan": "OPERATED BY HMS",
+    "address": "Harry Reid Airport",
+    "store_manager": "",
+    "phone_number": "",
+    "transaction_id": "CHK 111704",
+    "date": "12/2/2022",
+    "time": "1:23 PM",
+    "cashier": "",
+    "subtotal": 6.00,
+    "sales_tax": 0.50,
+    "total": 6.50,
+    "gift_card": 0,
+    "charged_amount": 6.50,
+    "card_type": "MasterCard",
+    "auth_code": "",
+    "chip_read": "",
+    "aid": "",
+    "issuer": "",
+    "policy_id": "",
+    "expiration_date": "",
+    "survey_message": "We value your feedback! Scan the QR code below to share your experience.",
+    "survey_website": "https://hmshost.com/contact/",
+    "user_id": "",
+    "password": "",
+    "eligibility_note": ""
+  },
+  "line_items": [
+    {
+      "sku": "",
+      "description": "1 GR GRN TEA LAT",
+      "details": "To Go",
+      "price": 6.00
+    }
+  ]
+}
+```
+
+Note: Some fields are left empty ("") as they are not provided in the receipt. Additional fields might be required to structure JSON perfectly according to a specified schema which were not visible or mentioned in the image of the receipt provided.
