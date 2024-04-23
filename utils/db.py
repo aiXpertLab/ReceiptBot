@@ -9,7 +9,8 @@ def mysql_conn():
     #             password= os.environ.get('MYSQL_PWD'),
     #             database = 'defaultdb',            )
     conn = st.connection('mysql', type='sql')
-    cursor = conn.cursor()
+    # cursor = conn.cursor()
+    cursor = conn
     return cursor, conn
 
 def mysql_check():
