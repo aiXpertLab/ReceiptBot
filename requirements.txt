@@ -5,3 +5,4 @@ tenacity
 PyPDF2
 mysql-connector-python
 SQLAlchemy
+mysqlclient
