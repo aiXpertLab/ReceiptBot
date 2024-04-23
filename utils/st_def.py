@@ -8,9 +8,7 @@ def st_sidebar():
         st.write("[Get an OpenAI API key](https://platform.openai.com/account/api-keys)")
         add_vertical_space(2)
         st.write('Made with ❤️ by [aiXpertLab](https://hypech.com)')
-
     return openai_api_key
-
    
 def st_logo(title="aiXpert!"):
     st.title(title)
