@@ -6,3 +6,4 @@ PyPDF2
 mysql-connector-python
 SQLAlchemy
 mysql
+mysqlclient
