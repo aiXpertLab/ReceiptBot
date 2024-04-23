@@ -10,7 +10,7 @@ def mysql_conn():
     #             database = 'defaultdb',            )
     conn = st.connection('mysql', type='sql')
     # cursor = conn.cursor()
-    conn.execute("SHOW TABLES;")
+    conn.query("SHOW TABLES;")
     cursor = conn
     return cursor, conn
 
