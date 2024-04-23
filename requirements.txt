@@ -3,5 +3,6 @@ streamlit_extras
 openai
 tenacity
 PyPDF2
-mysql-connector-python
 mysqlclient
+mysql-connector-python
+SQLAlchemy
