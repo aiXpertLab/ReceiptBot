@@ -4,4 +4,4 @@ openai
 tenacity
 PyPDF2
 mysql-connector-python
-mysql.connector
+mysqlclient
