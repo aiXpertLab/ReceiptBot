@@ -5,5 +5,6 @@ tenacity
 PyPDF2
 mysql-connector-python
 SQLAlchemy
-mysql
-mysqlclient==2.1.0
+python3-dev
+default-libmysqlclient-dev
+build-essential
