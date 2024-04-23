@@ -6,4 +6,4 @@ PyPDF2
 mysql-connector-python
 SQLAlchemy
 mysql
-mysqlclient
+mysqlclient==2.1.0
