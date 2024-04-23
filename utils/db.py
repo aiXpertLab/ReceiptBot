@@ -2,16 +2,13 @@ import os, mysql.connector, streamlit as st
 from datetime import datetime
 
 def mysql_conn():
-    # conn = mysql.connector.connect(
-    #             host="mysql-omni-omni.b.aivencloud.com",
-    #             port='21906',
-    #             user="avnadmin",
-    #             password= os.environ.get('MYSQL_PWD'),
-    #             database = 'defaultdb',            )
-    conn = st.connection('mysql', type='sql')
-    # cursor = conn.cursor()
-    conn.query("SHOW TABLES;")
-    cursor = conn
+    conn = mysql.connector.connect(
+                host="mysql-omni-omni.b.aivencloud.com",
+                port='21906',
+                user="avnadmin",
+                password= os.environ.get('MYSQL_PWD'),
+                database = 'defaultdb',            )
+    cursor = conn.cursor()
     return cursor, conn
 
 def mysql_check():
