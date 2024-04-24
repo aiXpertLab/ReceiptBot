@@ -23,6 +23,14 @@ with tab1:
         st.text(base64_image)
         st.success("Load successfully. Continue to next tab: Display")
 
+with tab2:   
+    camera_file = st.camera_input("Take a picture")
+    if camera_file is not None:
+        st.image(camera_file, caption='Receipt from Camera')
+        base64_image = base64.b64encode(camera_file.read()).decode('utf-8')
+        st.text(base64_image)
+        st.success("Load successfully. Continue to next tab: Display")   
+
 with tab3:
     if not base64_image:
         st.error('Please upload scanned receipt first.')
@@ -68,11 +76,3 @@ with tab3:
 
             # Display success message
             st.success("Message received successfully from the LLM.")
-
-with tab2:   
-    camera_file = st.camera_input("Take a picture")
-    if camera_file is not None:
-        st.image(camera_file, caption='Receipt from Camera')
-        base64_image = base64.b64encode(camera_file.read()).decode('utf-8')
-        st.text(base64_image)
-        st.success("Load successfully. Continue to next tab: Display")   
