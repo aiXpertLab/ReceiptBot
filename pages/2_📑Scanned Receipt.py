@@ -29,11 +29,11 @@ with tab2:
         st.image(camera_file, caption='Receipt from Camera')
         base64_image = base64.b64encode(camera_file.read()).decode('utf-8')
         st.text(base64_image)
-        st.success("Load successfully. Continue to next tab: Display")   
+        st.success("Load successfully. Continue to next tab to Display")   
 
 with tab3:
     if not base64_image:
-        st.error('Please upload scanned receipt first.')
+        st.error('Please upload or taking a picture of receipt.')
     else:
         openai_api_key= st_def.st_sidebar()
         if not openai_api_key:
