@@ -70,9 +70,9 @@ with tab3:
             st.success("Message received successfully from the LLM.")
 
 with tab2:   
-
-    picture = st.camera_input("Take a picture")
-
-    if picture:
-        st.image(picture)
-    
+    camera_file = st.camera_input("Take a picture")
+    if camera_file is not None:
+        st.image(camera_file, caption='Receipt from Camera')
+        base64_image = base64.b64encode(camera_file.read()).decode('utf-8')
+        st.text(base64_image)
+        st.success("Load successfully. Continue to next tab: Display")   
