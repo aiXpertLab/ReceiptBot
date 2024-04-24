@@ -44,6 +44,5 @@ st.markdown("""
     5. Lack of Contextual Understanding: Traditional approaches often lack the ability to understand the contextual meaning and relationships between different elements in a receipt. They rely on predefined patterns and fail to capture the nuances and semantics of the text.
     6. Limited Language Support: Traditional approaches may have limited support for multiple languages or may require separate models or rules for each language, making it challenging to process receipts from different regions or countries.
 
-   # 🍨 Text Extraction App Using Streamlit and OpenAI Vision
+   ##### 🍨 Text Extraction App Using Streamlit and OpenAI Vision
     """)
-st.image("./images/zhang.gif")

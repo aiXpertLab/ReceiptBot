@@ -14,7 +14,7 @@ model = 'gpt-4-turbo'
 with tab1:
     st.image("./data/scanned_sample.png")
     st.header("Upload Receipt")
-    uploaded_file = st.file_uploader("Upload scanned receipt: ", type=["jpg", "jpeg", "png", "pdf"])
+    uploaded_file = st.file_uploader("Upload scanned receipt: ", type=["jpg", "jpeg", "png"])
     if uploaded_file is not None:
         st.image(uploaded_file, caption='Uploaded Receipt')
         base64_image = base64.b64encode(uploaded_file.read()).decode('utf-8')
