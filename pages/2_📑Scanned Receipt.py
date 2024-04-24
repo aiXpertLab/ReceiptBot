@@ -39,40 +39,41 @@ with tab3:
         if not openai_api_key:
             st.info('Please enter OpenAI’s API key to continue extract the receipt uploaded.')
         else: 
-            var_for = """Given the receipt image provided, extract all relevant information and structure the output as detailed JSON that matches the database schema for storing receipt headers and line items. The receipt headers should include store name, slogan, address, store manager, phone number, transaction ID, date, time, cashier, subtotal, sales tax, total, gift card, charged amount, card type, authorization code, chip read, AID, issuer, policy ID, expiration date, survey message, survey website, user ID, password, and eligibility note. The line items should include SKU, description, details, and price for each item on the receipt. Exclude any sensitive information from the output. Format the JSON as follows:
-                {"receipt_headers": {"store_name": "",                "slogan": "",                "address": "",                "store_manager": "",
-                        "phone_number": "",                "transaction_id": "",                "date": "",                "time": "",
-                        "cashier": "",                "subtotal": 0,                "sales_tax": 0,                "total": 0,
-                        "gift_card": 0,                "charged_amount": 0,                "card_type": "",                "auth_code": "",
-                        "chip_read": "",                "aid": "",                "issuer": "",                "policy_id": "",
-                        "expiration_date": "",                "survey_message": "",                "survey_website": "",                "user_id": "",
-                        "password": "",                "eligibility_note": ""            },
-                    "line_items": [{"sku": "",                "description": "",                "details": "",                "price": 0}]}"""    
+            with st.spinner('AI Interpreting...')
+                var_for = """Given the receipt image provided, extract all relevant information and structure the output as detailed JSON that matches the database schema for storing receipt headers and line items. The receipt headers should include store name, slogan, address, store manager, phone number, transaction ID, date, time, cashier, subtotal, sales tax, total, gift card, charged amount, card type, authorization code, chip read, AID, issuer, policy ID, expiration date, survey message, survey website, user ID, password, and eligibility note. The line items should include SKU, description, details, and price for each item on the receipt. Exclude any sensitive information from the output. Format the JSON as follows:
+                    {"receipt_headers": {"store_name": "",                "slogan": "",                "address": "",                "store_manager": "",
+                            "phone_number": "",                "transaction_id": "",                "date": "",                "time": "",
+                            "cashier": "",                "subtotal": 0,                "sales_tax": 0,                "total": 0,
+                            "gift_card": 0,                "charged_amount": 0,                "card_type": "",                "auth_code": "",
+                            "chip_read": "",                "aid": "",                "issuer": "",                "policy_id": "",
+                            "expiration_date": "",                "survey_message": "",                "survey_website": "",                "user_id": "",
+                            "password": "",                "eligibility_note": ""            },
+                        "line_items": [{"sku": "",                "description": "",                "details": "",                "price": 0}]}"""    
 
-            receipt_data_str = ai.ai_vision(var_for = var_for, openai_api_key=openai_api_key, model_v=model, base64_image=base64_image)
-            # with open('re.txt', 'w') as file:
-            #     file.write(receipt_data_str)
-            # st.write(receipt_data_str)
+                receipt_data_str = ai.ai_vision(var_for = var_for, openai_api_key=openai_api_key, model_v=model, base64_image=base64_image)
+                # with open('re.txt', 'w') as file:
+                #     file.write(receipt_data_str)
+                # st.write(receipt_data_str)
 
-            # with open('re1.txt', 'r') as file:  receipt_data_str = file.read()
-            
-            start_index = receipt_data_str.find("{")    # Find the starting index of the JSON data (excluding the leading ```)
-            end_index = receipt_data_str.rfind("}")+1   # Find the ending index of the JSON data (excluding the trailing ```)
-            json_data = receipt_data_str[start_index:end_index] # Extract the JSON data as a substring
+                # with open('re1.txt', 'r') as file:  receipt_data_str = file.read()
+                
+                start_index = receipt_data_str.find("{")    # Find the starting index of the JSON data (excluding the leading ```)
+                end_index = receipt_data_str.rfind("}")+1   # Find the ending index of the JSON data (excluding the trailing ```)
+                json_data = receipt_data_str[start_index:end_index] # Extract the JSON data as a substring
 
-            receipt_dict = json.loads(json_data)
-            
-            col1, col2 = st.columns(2)
+                receipt_dict = json.loads(json_data)
+                
+                col1, col2 = st.columns(2)
 
-            with col1:
-                st.header("Scanned Receipt")
-                st.image(uploaded_file, caption='Uploaded Receipt')
+                with col1:
+                    st.header("Scanned Receipt")
+                    st.image(uploaded_file, caption='Uploaded Receipt')
 
-            with col2:
-                st.header("Extracted Data")
-                st.write(receipt_dict)
-            
-            # db.mysql_insert_receipt(receipt_dict)
+                with col2:
+                    st.header("Extracted Data")
+                    st.write(receipt_dict)
+                
+                # db.mysql_insert_receipt(receipt_dict)
 
-            # Display success message
-            st.success("Message received successfully from the LLM.")
+                # Display success message
+                st.success("Message received successfully from the LLM.")
