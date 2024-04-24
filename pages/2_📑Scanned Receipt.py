@@ -23,7 +23,8 @@ with tab1:
         st.text(base64_image)
         st.success("Load successfully. Continue to next tab: Display")
 
-with tab2:   
+with tab2:
+    uploaded_file = None
     uploaded_file = st.camera_input("Take a picture")
     if uploaded_file is not None:
         st.image(uploaded_file, caption='Receipt from Camera')
