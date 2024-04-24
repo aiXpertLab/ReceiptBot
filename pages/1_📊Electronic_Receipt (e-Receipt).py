@@ -31,8 +31,8 @@ with tab1:
 
 with tab2:
     if page_text is not None:
-        # st.write(type(page_text))
-        st.code(f'raw data:  {page_text}')
+        st.write(page_text)
+        # st.code(f'raw data:  {page_text}')
     else:
         st.warning("Please upload a PDF to display the data.")
     

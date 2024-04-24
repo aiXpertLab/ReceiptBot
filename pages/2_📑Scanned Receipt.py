@@ -6,7 +6,9 @@ import pandas as pd
 
 
 st_def.st_logo(title='👋 Scanned Recepit Extract')
-tab1, tab2, tab3,tab4 = st.tabs(["Upload", "Display", "Save", "Database"])
+# tab1, tab2, tab3,tab4 = st.tabs(["Upload", "Display", "Save", "Database"])
+tab1, tab2 = st.tabs(["Upload Receipt", "Display the Data"])
+
 uploaded_file = None
 base64_image = None
 model = 'gpt-4-turbo'
@@ -38,12 +40,13 @@ with tab2:
                         "expiration_date": "",                "survey_message": "",                "survey_website": "",                "user_id": "",
                         "password": "",                "eligibility_note": ""            },
                     "line_items": [{"sku": "",                "description": "",                "details": "",                "price": 0}]}"""    
-            # receipt_data_str = ai.ai_vision(var_for = var_for, openai_api_key=openai_api_key, model_v=model, base64_image=base64_image)
+
+            receipt_data_str = ai.ai_vision(var_for = var_for, openai_api_key=openai_api_key, model_v=model, base64_image=base64_image)
             # with open('re.txt', 'w') as file:
             #     file.write(receipt_data_str)
             # st.write(receipt_data_str)
 
-            with open('re1.txt', 'r') as file:  receipt_data_str = file.read()
+            # with open('re1.txt', 'r') as file:  receipt_data_str = file.read()
             
             start_index = receipt_data_str.find("{")    # Find the starting index of the JSON data (excluding the leading ```)
             end_index = receipt_data_str.rfind("}")+1   # Find the ending index of the JSON data (excluding the trailing ```)
@@ -61,92 +64,92 @@ with tab2:
                 st.header("Extracted Data")
                 st.write(receipt_dict)
             
-            db.mysql_insert_receipt(receipt_dict)
+            # db.mysql_insert_receipt(receipt_dict)
 
             # Display success message
             st.success("Message received successfully from the LLM.")
 
-    with tab3:
-        cursor, conn = db.mysql_conn()
-        st.header("Display the Data")
-        # Fetch all records from the receipt_headers table, excluding the time column
-        cursor.execute("SELECT store_name, slogan, address, store_manager, phone_number, transaction_id, date, cashier, subtotal, sales_tax, total, gift_card, charged_amount, card_type, auth_code, chip_read, aid, issuer, policy_id, expiration_date, survey_message, survey_website, user_id, password, eligibility_note FROM receipt_headers;")
-        headers = cursor.fetchall()
+    # with tab3:
+    #     cursor, conn = db.mysql_conn()
+    #     st.header("Display the Data")
+    #     # Fetch all records from the receipt_headers table, excluding the time column
+    #     cursor.execute("SELECT store_name, slogan, address, store_manager, phone_number, transaction_id, date, cashier, subtotal, sales_tax, total, gift_card, charged_amount, card_type, auth_code, chip_read, aid, issuer, policy_id, expiration_date, survey_message, survey_website, user_id, password, eligibility_note FROM receipt_headers;")
+    #     headers = cursor.fetchall()
 
-        # Display the headers in a table
-        st.subheader("Receipt Headers")
-        st.table(headers)
+    #     # Display the headers in a table
+    #     st.subheader("Receipt Headers")
+    #     st.table(headers)
 
-        # Fetch and display all records from the line_items table
-        st.subheader("Line Items")
-        cursor.execute("SELECT * FROM line_items;")
-        items = cursor.fetchall()
-        st.table(items)
+    #     # Fetch and display all records from the line_items table
+    #     st.subheader("Line Items")
+    #     cursor.execute("SELECT * FROM line_items;")
+    #     items = cursor.fetchall()
+    #     st.table(items)
 
-        # Close the cursor and the connection
-        cursor.close()
-        conn.close()
+    #     # Close the cursor and the connection
+    #     cursor.close()
+    #     conn.close()
         
-    with tab4:        
-        # Receipt headers data
-        receipt_headers_data = {
-            "store_name": "Starbucks E Food Court #16599",
-            "slogan": "OPERATED BY HMS",
-            "address": "Harry Reid Airport",
-            "store_manager": "",
-            "phone_number": "",
-            "transaction_id": "CHK 111704",
-            "date": "12/2/2022",
-            "time": "1:23 PM",
-            "cashier": "",
-            "subtotal": 6.00,
-            "sales_tax": 0.50,
-            "total": 6.50,
-            "gift_card": 0,
-            "charged_amount": 6.50,
-            "card_type": "MasterCard",
-            "auth_code": "",
-            "chip_read": "",
-            "aid": "",
-            "issuer": "",
-            "policy_id": "",
-            "expiration_date": "",
-            "survey_message": "We value your feedback! Scan the QR code below to share your experience.",
-            "survey_website": "https://hmshost.com/contact/",
-            "user_id": "",
-            "password": "",
-            "eligibility_note": ""
-        }
+    # with tab4:        
+    #     # Receipt headers data
+    #     receipt_headers_data = {
+    #         "store_name": "Starbucks E Food Court #16599",
+    #         "slogan": "OPERATED BY HMS",
+    #         "address": "Harry Reid Airport",
+    #         "store_manager": "",
+    #         "phone_number": "",
+    #         "transaction_id": "CHK 111704",
+    #         "date": "12/2/2022",
+    #         "time": "1:23 PM",
+    #         "cashier": "",
+    #         "subtotal": 6.00,
+    #         "sales_tax": 0.50,
+    #         "total": 6.50,
+    #         "gift_card": 0,
+    #         "charged_amount": 6.50,
+    #         "card_type": "MasterCard",
+    #         "auth_code": "",
+    #         "chip_read": "",
+    #         "aid": "",
+    #         "issuer": "",
+    #         "policy_id": "",
+    #         "expiration_date": "",
+    #         "survey_message": "We value your feedback! Scan the QR code below to share your experience.",
+    #         "survey_website": "https://hmshost.com/contact/",
+    #         "user_id": "",
+    #         "password": "",
+    #         "eligibility_note": ""
+    #     }
 
-        # Line items data
-        line_items_data = [
-            {
-                "sku": "",
-                "description": "1 GR GRN TEA LAT",
-                "details": "To Go",
-                "price": 6.00
-            },
-            {
-                "sku": "d34358axe",
-                "description": "2 GR APL",
-                "details": "To Go",
-                "price": 16.00
-            },
-            {
-                "sku": "12x3ce",
-                "description": "COF BAN SILK",
-                "details": "",
-                "price": 61.00
-            }
-        ]
+    #     # Line items data
+    #     line_items_data = [
+    #         {
+    #             "sku": "",
+    #             "description": "1 GR GRN TEA LAT",
+    #             "details": "To Go",
+    #             "price": 6.00
+    #         },
+    #         {
+    #             "sku": "d34358axe",
+    #             "description": "2 GR APL",
+    #             "details": "To Go",
+    #             "price": 16.00
+    #         },
+    #         {
+    #             "sku": "12x3ce",
+    #             "description": "COF BAN SILK",
+    #             "details": "",
+    #             "price": 61.00
+    #         }
+    #     ]
 
-        # Create DataFrames
-        receipt_headers_df = pd.DataFrame(receipt_headers_data, index=[0])
-        line_items_df = pd.DataFrame(line_items_data)
+    #     # Create DataFrames
+    #     receipt_headers_df = pd.DataFrame(receipt_headers_data, index=[0])
+    #     line_items_df = pd.DataFrame(line_items_data)
 
-        # Display the DataFrames
-        st.write("Receipt Headers DataFrame:")
-        st.write(receipt_headers_df)
+    #     # Display the DataFrames
+    #     st.write("Receipt Headers DataFrame:")
+    #     st.write(receipt_headers_df)
 
-        st.write("\nLine Items DataFrame:")
-        st.write(line_items_df)
+    #     st.write("\nLine Items DataFrame:")
+    #     st.write(line_items_df)
