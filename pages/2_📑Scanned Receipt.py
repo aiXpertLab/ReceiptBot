@@ -39,7 +39,7 @@ with tab3:
         if not openai_api_key:
             st.info('Please enter OpenAI’s API key to continue extract the receipt uploaded.')
         else: 
-            with st.spinner('AI Interpreting...')
+            with st.spinner('AI Interpreting...'):
                 var_for = """Given the receipt image provided, extract all relevant information and structure the output as detailed JSON that matches the database schema for storing receipt headers and line items. The receipt headers should include store name, slogan, address, store manager, phone number, transaction ID, date, time, cashier, subtotal, sales tax, total, gift card, charged amount, card type, authorization code, chip read, AID, issuer, policy ID, expiration date, survey message, survey website, user ID, password, and eligibility note. The line items should include SKU, description, details, and price for each item on the receipt. Exclude any sensitive information from the output. Format the JSON as follows:
                     {"receipt_headers": {"store_name": "",                "slogan": "",                "address": "",                "store_manager": "",
                             "phone_number": "",                "transaction_id": "",                "date": "",                "time": "",
