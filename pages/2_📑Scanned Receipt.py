@@ -24,10 +24,10 @@ with tab1:
         st.success("Load successfully. Continue to next tab: Display")
 
 with tab2:   
-    camera_file = st.camera_input("Take a picture")
-    if camera_file is not None:
-        st.image(camera_file, caption='Receipt from Camera')
-        base64_image = base64.b64encode(camera_file.read()).decode('utf-8')
+    uploaded_file = st.camera_input("Take a picture")
+    if uploaded_file is not None:
+        st.image(uploaded_file, caption='Receipt from Camera')
+        base64_image = base64.b64encode(uploaded_file.read()).decode('utf-8')
         st.text(base64_image)
         st.success("Load successfully. Continue to next tab to Display")   
 
