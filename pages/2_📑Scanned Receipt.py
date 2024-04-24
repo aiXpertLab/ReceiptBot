@@ -33,7 +33,7 @@ with tab2:
 
 with tab3:
     if not base64_image:
-        st.error('Please upload or taking a picture of receipt.')
+        st.error('Please upload or take a picture of receipt.')
     else:
         openai_api_key= st_def.st_sidebar()
         if not openai_api_key:
