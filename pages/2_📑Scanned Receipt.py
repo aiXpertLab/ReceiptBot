@@ -1,7 +1,5 @@
-import streamlit as st, base64, json, re
-from datetime import datetime
-from utils import ai, st_def, db
-import pandas as pd
+import streamlit as st, base64, json
+from utils import ai, st_def
 
 st_def.st_logo(title='👋 Scanned Recepit Extract')
 tab1, tab2 = st.tabs(["Upload Receipt","Camera",])
