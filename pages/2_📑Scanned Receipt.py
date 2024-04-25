@@ -1,7 +1,7 @@
 import streamlit as st, base64, json
 from utils import ai, st_def
 
-st_def.st_logo(title='👋 Scanned Recepit Extract')
+st_def.st_logo(title='Recepit Extract')
 tab1, tab2 = st.tabs(["Upload Receipt","Camera",])
 openai_api_key= st_def.st_sidebar()
 
