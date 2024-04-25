@@ -17,7 +17,7 @@ def st_logo(title="aiXpert!"):
     <style>
         [data-testid="stSidebarNav"] {
             background-image: url(https://hypech.com/images/logo/st_receiptbot.png);
-            background-size: 150px; /* Set the width and height of the image */
+            background-size: 200px; /* Set the width and height of the image */
             background-repeat: no-repeat;
             padding-top: 80px;
             background-position: 15px 10px;
