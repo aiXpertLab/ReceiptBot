@@ -1,42 +1,19 @@
 import streamlit as st, base64, json, re
-import mysql.connector
 from datetime import datetime
 from utils import ai, st_def, db
 import pandas as pd
 
-
 st_def.st_logo(title='👋 Scanned Recepit Extract')
-# tab1, tab2, tab3,tab4 = st.tabs(["Upload", "Display", "Save", "Database"])
-tab1, tab2, tab3 = st.tabs(["Upload Receipt","Camera", "Display the Data"])
+tab1, tab2 = st.tabs(["Upload Receipt","Camera",])
+openai_api_key= st_def.st_sidebar()
 
-uploaded_file = None
-base64_image = None
 model = 'gpt-4-turbo'
 
-with tab1:
-    st.image("./data/scanned_sample.png")
-    st.header("Upload Receipt")
-    uploaded_file = st.file_uploader("Upload scanned receipt: ", type=["jpg", "jpeg", "png"])
-    if uploaded_file is not None:
-        st.image(uploaded_file, caption='Uploaded Receipt')
-        base64_image = base64.b64encode(uploaded_file.read()).decode('utf-8')
-        st.text(base64_image)
-        st.success("Load successfully. Continue to next tab: Display")
-
-with tab2:
-    uploaded_file = None
-    uploaded_file = st.camera_input("Take a picture")
-    if uploaded_file is not None:
-        st.image(uploaded_file, caption='Receipt from Camera')
-        base64_image = base64.b64encode(uploaded_file.read()).decode('utf-8')
-        st.text(base64_image)
-        st.success("Load successfully. Continue to next tab to Display")   
-
-with tab3:
+def ai_ai(base64_image):
+    print(11134)
     if not base64_image:
         st.error('Please upload or take a picture of receipt.')
     else:
-        openai_api_key= st_def.st_sidebar()
         if not openai_api_key:
             st.info('Please enter OpenAI’s API key to continue extract the receipt uploaded.')
         else: 
@@ -74,7 +51,24 @@ with tab3:
                     st.header("Extracted Data")
                     st.write(receipt_dict)
                 
-                # db.mysql_insert_receipt(receipt_dict)
-
-                # Display success message
                 st.success("Message received successfully from the LLM.")
+
+with tab1:
+    # st.image("./data/scanned_sample.png")
+    st.header("Upload Receipt")
+    uploaded_file = st.file_uploader("Upload scanned receipt: ", type=["jpg", "jpeg", "png"])
+    if uploaded_file is not None:
+        st.image(uploaded_file, caption='Uploaded Receipt')
+        base64_image = base64.b64encode(uploaded_file.read()).decode('utf-8')
+        st.text(base64_image)
+        # st.success("Load successfully. Continue to next tab: Display")
+        ai_ai(base64_image)
+
+with tab2:
+    # uploaded_file = None
+    uploaded_file = st.camera_input("Take a picture")
+    if uploaded_file is not None:
+        st.image(uploaded_file, caption='Receipt from Camera')
+        base64_image = base64.b64encode(uploaded_file.read()).decode('utf-8')
+        st.text(base64_image)
+        ai_ai(base64_image)
